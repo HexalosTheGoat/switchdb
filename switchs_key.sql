@@ -1,62 +1,60 @@
 -- ==========================================
--- [BASE DE DONNÉES] >>> CRÉATION
--- INITIALISATION DE LA TABLE DES SWITCHS
+-- [BASE DE DONNÉES] >>> STRUCTURE
+-- INITIALISATION DES TABLES
 -- ==========================================
 CREATE TABLE switchs_clavier (
     
-    -- Identifiant matriciel unique (Génération automatique MS SQL)
     id INT PRIMARY KEY IDENTITY(1,1),
     
-    -- Constructeur et désignation du matériel
+    -- Usinage
     marque VARCHAR(50) NOT NULL,
     modele VARCHAR(50) NOT NULL,
-    couleur VARCHAR(30),
     
-    -- Profil d'utilisation et caractéristiques sonores
+    -- Couleurs
+    couleur_1 VARCHAR(30) NULL,
+    couleur_2 VARCHAR(30) NULL,
+    couleur_3 VARCHAR(30) NULL,
+    
+    -- Utilisation client
     type_switch VARCHAR(20) NOT NULL,
     niveau_bruit VARCHAR(30),
     trouvabilite VARCHAR(30),
     
-    -- Calibrage physique : Pression (g) et course (mm)
+    -- Valeurs physique
     force_activation INT,
     force_talonnage INT,
     course_activation DECIMAL(3,1),
     course_totale DECIMAL(3,1),
     
-    -- Logistique : Coût unitaire et options d'usine (Format BIT : 1=Oui, 0=Non)
+    -- Logistique
     prix_unitaire DECIMAL(4,2),
     lubrifie_usine BIT
 );
 
 -- ==========================================
--- [INSERTION] >>> AJOUT DES DONNÉES
--- ENREGISTREMENT DES MODÈLES DANS LA BASE
+-- [INSERTION] >>> SWITCHS
 -- ==========================================
 INSERT INTO switchs_clavier 
-(marque, modele, couleur, type_switch, niveau_bruit, trouvabilite, force_activation, force_talonnage, course_activation, course_totale, prix_unitaire, lubrifie_usine)
+(marque, modele, couleur_1, couleur_2, couleur_3, type_switch, niveau_bruit, trouvabilite, force_activation, force_talonnage, course_activation, course_totale, prix_unitaire, lubrifie_usine)
 VALUES
 
--- Modèle linéaire standard : Fiable et courant
-('Cherry', 'MX Red', 'Rouge', 'Linéaire', 'Modéré', 'Courant', 45, 60, 2.0, 4.0, 0.40, 0),
-
--- Modèle tactile silencieux : Optimisé pour un environnement calme
-('Gazzew', 'Boba U4', 'Blanc', 'Tactile', 'Silencieux', 'Moyen', 62, 68, 2.0, 4.0, 0.65, 0),
-
--- Modèle linéaire fluide : Efficace et économique
-('Gateron', 'Milky Yellow', 'Jaune', 'Linéaire', 'Modéré', 'Courant', 50, 65, 2.0, 4.0, 0.30, 1),
-
--- Modèle tactile premium : Rare et signature sonore marquée
-('Drop', 'Holy Panda', 'Saumon', 'Tactile', 'Bruyant', 'Rare', 67, 67, 2.0, 4.0, 1.20, 1);
+('HMX', 'Firecracker', 'Blanc', 'Bleu', 'Rouge', 'Tactile', 'Modéré', 'Rare', 40, 58, 2.5, 3.5, 0.43, 1),
+('HMX', 'Aster', 'Blanc', 'Violet', 'Jaune', 'Linéaire', 'Clacky', 'Courant', 42, 48, 2.0, 3.6, 0.32, 1),
+('Wingtree', 'G-One', 'Bleu', 'Gris', NULL, 'Linéaire', 'Clacky', 'Courant', 42, 47, 2.0, 3.6, 0.32, 1),
+('Lichicx', 'Yogurt', 'Bleu', 'Blanc', NULL, 'Linéaire', 'Silencieux', 'Courant', 45, 53, 2.0, 3.8, 0.80, 1),
+('HMX', 'Lanikai', 'Beige', 'Blanc', NULL, 'Linéaire', 'Clacky', 'Courant', 43, 53, 2.0, 3.7, 0.70, 1),
+('Keygeek', 'Y2', 'Rouge', 'Jaune', NULL, 'Linéaire', 'Thocky', 'Rare', 48, 53, 2.0, 3.6, 0.70, 1),
+('Keygeek', 'Y3X', 'Blanc', 'Noir', NULL, 'Linéaire', 'Thocky', 'Courant', 48, 53, 2.0, 3.8, 0.50, 1),
+('HMX', 'Crisp', 'Bleu', 'Rose', 'Transparent', 'Linéaire', 'Clacky', 'Courant', 48, 55, 2.0, 3.5, 0.70, 1);
 
 -- ==========================================
 -- [REQUÊTES] >>> ANALYSE ET LECTURE
--- INTERROGATION DES REGISTRES
 -- ==========================================
 
--- Scanner et afficher l'intégralité des données enregistrées
+-- Affichage complet
 SELECT * FROM switchs_clavier;
 
--- Filtrer les données : Afficher uniquement les modèles courants à moins de 0.50€
+-- Prix en dessous de 0.50€
 SELECT marque, modele, prix_unitaire, trouvabilite
 FROM switchs_clavier 
 WHERE trouvabilite = 'Courant' AND prix_unitaire <= 0.50;
