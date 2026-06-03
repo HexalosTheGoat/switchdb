@@ -13,7 +13,7 @@ require 'includes/header.php';
 
 // Récupération des switchs mis en favoris par l'utilisateur connecté
 $stmt = $bdd->prepare("
-    SELECT s.nom, s.marque, s.type_switch, s.prix_unitaire, f.date_ajout 
+    SELECT s.id_switch, s.nom, s.marque, s.type_switch, s.prix_unitaire, f.date_ajout 
     FROM favoris f
     INNER JOIN switchs s ON f.id_switch = s.id_switch
     WHERE f.id_user = :id_user
@@ -46,6 +46,7 @@ $mes_favoris = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td style="padding: 10px; border-bottom: 1px solid #ddd;"><?php echo htmlspecialchars($fav['type_switch']); ?></td>
                         <td style="padding: 10px; border-bottom: 1px solid #ddd;"><?php echo htmlspecialchars($fav['prix_unitaire']); ?> €</td>
                         <td style="padding: 10px; border-bottom: 1px solid #ddd;"><?php echo htmlspecialchars($fav['date_ajout']); ?></td>
+                        <td style="padding: 10px; border-bottom: 1px solid #ddd;"><a href="retirer_favori.php?id=<?php echo $fav['id_switch']; ?>" style="color: red; text-decoration: none; font-weight: bold;">❌ Retirer</a></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
