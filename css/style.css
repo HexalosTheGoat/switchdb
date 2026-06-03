@@ -1,0 +1,75 @@
+/* Importation d'une police moderne (Roboto) */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif; /* [cite: 234] */
+    background-color: #F5F5F5; /* Fond clair  */
+    color: #1A1A1A; /* Texte principal  */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- BARRE DE NAVIGATION --- */
+header {
+    background-color: #1F4E79; /* Couleur principale  */
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #2E75B6; /* Couleur secondaire  */
+}
+
+/* Bouton spécial (Accent) */
+.btn-accent {
+    background-color: #E63946; /* Accent rouge  */
+}
+
+/* --- CONTENU PRINCIPAL --- */
+main {
+    flex: 1; /* Permet au footer de rester en bas */
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* --- PIED DE PAGE --- */
+footer {
+    background-color: #1F4E79;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+}
